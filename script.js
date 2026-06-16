@@ -45,4 +45,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // スクロールイベントに登録
   window.addEventListener("scroll", revealOnScroll);
+  // ==========================================
+  // 3. ハンバーガーメニューの開閉制御
+  // ==========================================
+  const hamburgerBtn = document.getElementById("hamburger-btn");
+  const navMenu = document.getElementById("nav-menu");
+  const menuLinks = document.querySelectorAll(".nav-menu ul a");
+
+  // ボタンをクリックした時の切り替え
+  hamburgerBtn.addEventListener("click", () => {
+    hamburgerBtn.classList.toggle("open");
+    navMenu.classList.toggle("open");
+  });
+
+  // メニュー内のリンクをクリックしたら自動で閉じる（ページ内スクロール用）
+  menuLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      hamburgerBtn.classList.remove("open");
+      navMenu.classList.remove("open");
+    });
+  });
 });

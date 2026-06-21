@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // スクロールイベントに登録
   window.addEventListener("scroll", revealOnScroll);
+
   // ==========================================
   // 3. ハンバーガーメニューの開閉制御
   // ==========================================
@@ -64,5 +65,46 @@ document.addEventListener("DOMContentLoaded", () => {
       hamburgerBtn.classList.remove("open");
       navMenu.classList.remove("open");
     });
+  });
+});
+// --- メンバーカード詳細表示モーダルの制御 ---
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("detail-modal");
+  const closeBtn = document.querySelector(".detail-modal-close");
+  const cards = document.querySelectorAll(".clickable-card");
+
+  // モーダル内の各要素
+  const mAvatar = document.getElementById("modal-avatar");
+  const mName = document.getElementById("modal-name");
+  const mRole = document.getElementById("modal-role");
+  const mUniv = document.getElementById("modal-univ");
+  const mProfile = document.getElementById("modal-profile");
+
+  // カードがクリックされたときの処理
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      // カードのデータ属性から情報を取得してモーダルにセット
+      mAvatar.src = card.getAttribute("data-img");
+      mAvatar.alt = card.getAttribute("data-name");
+      mName.textContent = card.getAttribute("data-name");
+      mRole.textContent = card.getAttribute("data-role");
+      mUniv.textContent = card.getAttribute("data-univ");
+      mProfile.textContent = card.getAttribute("data-profile");
+
+      // モーダルを表示
+      modal.style.display = "block";
+    });
+  });
+
+  // × ボタンをクリックしたとき
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // モーダルの背景（黒い透過部分）をクリックしたときも閉じる
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
   });
 });
